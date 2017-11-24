@@ -9,27 +9,47 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class CollectionTest {
 
-    public List<String> testList(){
+    public static void testHashMap(){
+        Map<String, Object> map = new HashMap<>(16);
+        map.put("111","AAA");
+        map.put("222","BBB");
+        map.put("333","CCC");
+        map.put("444","DDD");
+        //使HashMap变成线程安全的
+        Collections.synchronizedMap(map);
+        map.forEach((key, value) -> System.out.println(key + " -- " + value));
+    }
+
+    public static List<String> testList(){
+        //使用Collections.synchronizedList(arrayList)也可以使ArrayList同步
+        Collections.synchronizedList(new ArrayList<>());
         //线程安全的List
         List<String> list = new CopyOnWriteArrayList<>();
-        for (int i = 0 ; i < 10 ; i++) {
-            list.add(String.valueOf(i));
-        }
+        list.add("AAA");
+        list.add("BBB");
+        list.add("CCC");
+        list.add("DDD");
+        list.forEach(value -> {
+            System.out.println("值：" + value);
+        });
         return list;
     }
 
-    public void testCollection(){
-        //有序的set集合，它继承于HashSet，仅仅比HashSet多个有序
+    public static void testSet(){
+        //有顺序但不重复的set集合，它继承于HashSet，仅仅比HashSet多个有序
         Set<String> set = new LinkedHashSet<>();
-        for (int i = 0 ; i < 1000 ; i++) {
-            set.add(String.valueOf(i));
-        }
+        set.add("AAA");
+        set.add("BBB");
+        set.add("AAA");
+        set.add("CCC");
+        set.add("DDD");
+        //jdk1.8 的遍历
         set.forEach(System.out::println);
     }
 
-    public void testMap(){
+    public static void testMap(){
         //有序的Map，LinkedHashMap (它是HashMap的子类，继承了HashMap)
-        Map<String, Object> map = new LinkedHashMap<>();
+        Map<String, Object> map = new LinkedHashMap<>(16);
         map.put("AAA","1");
         map.put("BBB","2");
         map.put("CCC","3");

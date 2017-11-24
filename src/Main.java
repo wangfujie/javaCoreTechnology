@@ -1,3 +1,5 @@
+import collection.CollectionTest;
+
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -8,5 +10,6 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
+        CollectionTest.testSet();
     }
 }
