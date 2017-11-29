@@ -1,6 +1,5 @@
 package base;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -8,6 +7,7 @@ import java.util.Date;
  * @author wangfujie
  */
 public class StringTest {
+
     /**
      * 码点与代码单元
      */
