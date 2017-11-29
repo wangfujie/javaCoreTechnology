@@ -1,15 +1,16 @@
-import collection.CollectionTest;
+import base.*;
 
-import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Date;
+import java.util.Scanner;
 
 /**
  * @author wangfujie
  */
 public class Main {
 
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
-        CollectionTest.testSet();
+    public static strictfp void main(String[] args) {
+        //用逗号分割字符串“hello”
+        System.out.println(String.join(",","hello".split("")));
+        StringTest.formatTest();
     }
 }
