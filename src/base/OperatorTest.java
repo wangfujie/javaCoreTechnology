@@ -6,6 +6,10 @@ package base;
  */
 public class OperatorTest {
 
+    public static void main(String[] args) {
+        indexOperatorTest();
+    }
+
     /**
      * 位运算符
      */

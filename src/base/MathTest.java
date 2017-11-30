@@ -6,6 +6,10 @@ package base;
  */
 public class MathTest {
 
+    public static void main(String[] args) {
+
+    }
+
     /**
      * 求平方根
      */

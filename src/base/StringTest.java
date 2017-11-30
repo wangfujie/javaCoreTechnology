@@ -8,6 +8,10 @@ import java.util.Date;
  */
 public class StringTest {
 
+    public static void main(String[] args) {
+        codePointTest();
+    }
+
     /**
      * 码点与代码单元
      */
@@ -40,4 +44,27 @@ public class StringTest {
         System.out.println(new Date());
     }
 
+    /**
+     * 将汉字转换成拼音
+     * @param hanyu
+     * @return
+     * @throws Exception
+     */
+    public static String hanyu2py(String hanyu) throws Exception{
+        if (hanyu == null || "".equals(hanyu)) {
+            throw new Exception("空值无法转成拼音");
+        }
+        char[] charArray = hanyu.toCharArray();
+        StringBuilder pinyin = new StringBuilder();
+        for(int i=0; i<charArray.length; i++){
+            if(Character.toString(charArray[i]).matches("[\\u4E00-\\u9FA5]+")){
+                System.out.println(charArray[i]);
+//                String[] arr = PinyinHelper.toHanyuPinyinStringArray(charArray[i]);
+//                pinyin.append(arr[0].charAt(0));
+            }else{
+                pinyin.append(charArray[i]);
+            }
+        }
+        return pinyin.toString();
+    }
 }
