@@ -1,2 +1,2 @@
 # javaCoreTechnology
-JAVA核心技术demo
+Some Contents of JAVA Core Technology
