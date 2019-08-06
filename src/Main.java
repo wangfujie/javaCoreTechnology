@@ -8,8 +8,8 @@ public class Main {
 
     public static strictfp void main(String[] args) throws Exception {
         //用逗号分割字符串“hello”
-        System.out.println(String.join(",","hello".split("")));
+//        System.out.println(String.join(",","hello".split("")));
         //测试类方法调用
-        StringTest.hanyu2py("汉语");
+        System.out.println(StringTest.hanyu2py("汉语"));
     }
 }

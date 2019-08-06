@@ -59,9 +59,9 @@ public class StringTest {
         StringBuilder pinyin = new StringBuilder();
         for(int i=0; i<charArray.length; i++){
             if(Character.toString(charArray[i]).matches("[\\u4E00-\\u9FA5]+")){
-                System.out.println(charArray[i]);
-                String[] arr = PinyinHelper.toHanyuPinyinStringArray(charArray[i]);
-                pinyin.append(arr[0].charAt(0));
+//                System.out.println(charArray[i]);
+                String[] arr = PinyinHelper.toTongyongPinyinStringArray(charArray[i]);
+                pinyin.append(arr[0]);
             }else{
                 pinyin.append(charArray[i]);
             }
