@@ -1,6 +1,7 @@
 package collection;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -9,20 +10,33 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class CollectionTest {
 
+    public static void main(String[] args) {
+        CollectionTest.testHashMap();
+    }
+
     public static void testHashMap(){
-        Map<String, Object> map = new HashMap<>(16);
-        map.put("111","AAA");
-        map.put("222","BBB");
-        map.put("333","CCC");
-        map.put("444","DDD");
-        //使HashMap变成线程安全的
-        Collections.synchronizedMap(map);
-        map.forEach((key, value) -> System.out.println(key + " -- " + value));
+        //使HashMap变成线程安全的，synchronizedMap方法返回一个线程安全的map
+        Map<String, Object> map = Collections.synchronizedMap(new HashMap<>(10000));
+
+        for (int i = 0 ;i < 10000 ; i++){
+            String finalI = String.valueOf(i);
+            new Thread(() -> {
+                map.put(finalI, finalI);
+            }).start();
+        }
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        while (true){
+            System.out.println(map.size());
+        }
     }
 
     public static List<String> testList(){
-        //使用Collections.synchronizedList(arrayList)也可以使ArrayList同步
-        Collections.synchronizedList(new ArrayList<>());
+        //使用Collections.synchronizedList(arrayList)可以返回一个同步的ArrayList
+        List<String> synList = Collections.synchronizedList(new ArrayList<>());
         //线程安全的List
         List<String> list = new CopyOnWriteArrayList<>();
         list.add("AAA");
