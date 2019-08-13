@@ -21,7 +21,12 @@ public class TestTimer {
         //定时调度任务，开始时间2019-08-12 21:00:00 每隔1秒执行
         Calendar calendar = new GregorianCalendar(2019,7,12,21,0,0);
         System.out.println(calendar.getTime());
-        timer.schedule(new MyTask(), calendar.getTime(), 200);
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("定时任务执行成功=====================");
+            }
+        }, calendar.getTime(), 200);
     }
 
 }
