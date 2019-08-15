@@ -1,4 +1,4 @@
-package network;
+package network.udp;
 
 /**
  *  在线交流，线程实现双向交流

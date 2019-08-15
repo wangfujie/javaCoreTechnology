@@ -1,4 +1,4 @@
-package network;
+package network.udp;
 
 import java.io.*;
 import java.net.DatagramPacket;
