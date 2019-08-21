@@ -16,8 +16,8 @@ public class ChatRoomServer {
         ServerSocket clientSocket = new ServerSocket(8088);
         while (flag){
             Socket socket = clientSocket.accept();
-            //开启转发线程
-            new Thread(new TcpMsgForwardThread(socket)).start();
+            //开启管道线程
+            new Thread(new ChannelThread(socket)).start();
         }
     }
 }

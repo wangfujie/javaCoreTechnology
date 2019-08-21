@@ -22,16 +22,25 @@ public class TcpReceiveMsgThread implements Runnable {
         }
     }
 
+    /**
+     * 接收消息
+     * @return
+     */
+    public String receiveMsg(){
+        String msg = "";
+        try {
+            msg = receiveStream.readUTF();
+        } catch (IOException e) {
+            //关闭资源
+            close();
+        }
+        return msg;
+    }
+
     @Override
     public void run() {
-        String message;
         while (!socket.isClosed()){
-            try {
-                message = receiveStream.readUTF();
-                System.out.println(message);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            System.out.println(receiveMsg());
         }
         //关闭资源
         close();
@@ -41,11 +50,6 @@ public class TcpReceiveMsgThread implements Runnable {
      * 关闭资源
      */
     private void close(){
-        try {
-            receiveStream.close();
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        IoUtils.release(receiveStream,socket);
     }
 }

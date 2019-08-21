@@ -12,32 +12,45 @@ public class TcpSendMsgThread implements Runnable {
     private Socket socket;
     private DataOutputStream sendStream;
     private BufferedReader reader;
-    private boolean isOnline = true;
 
-    public TcpSendMsgThread(Socket socket){
+    public TcpSendMsgThread(Socket socket, String name){
         try {
             this.socket = socket;
             sendStream = new DataOutputStream(socket.getOutputStream());
             reader = new BufferedReader(new InputStreamReader(System.in));
+            //发送客户端名称
+            sendStream.writeUTF(name);
         } catch (IOException e) {
-            e.printStackTrace();
+            //关闭资源
+            close();
+        }
+    }
+
+    /**
+     * 接受控制台输入，并发送消息
+     */
+    public void sendMsg(String message){
+        try {
+            sendStream.writeUTF(message);
+            sendStream.flush();
+        } catch (IOException e) {
+            //关闭资源
+            close();
         }
     }
 
     @Override
     public void run() {
-        String message;
-        while (isOnline){
+        while (!socket.isClosed()){
             try {
-                message = reader.readLine();
-                if ("exit".equals(message)) {
-                    isOnline = false;
-                    sendStream.writeUTF(Thread.currentThread().getName() + "下线了");
+                String message = reader.readLine();
+                if ("exit".equals(message)){
                     break;
                 }
-                sendStream.writeUTF(Thread.currentThread().getName() + "说:" + message);
+                sendMsg(message);
             } catch (IOException e) {
-                e.printStackTrace();
+                //关闭资源
+                close();
             }
         }
         //关闭资源
@@ -48,12 +61,6 @@ public class TcpSendMsgThread implements Runnable {
      * 关闭资源
      */
     private void close(){
-        try {
-            reader.close();
-            sendStream.close();
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        IoUtils.release(reader,sendStream);
     }
 }
