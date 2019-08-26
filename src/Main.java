@@ -7,9 +7,7 @@ import base.*;
 public class Main {
 
     public static strictfp void main(String[] args) throws Exception {
-        //用逗号分割字符串“hello”
-//        System.out.println(String.join(",","hello".split("")));
-        //测试类方法调用
-        System.out.println(StringTest.hanyu2py("汉语"));
+        //返回java堆大小，单位字节
+        System.out.println("JAVA堆：" + Runtime.getRuntime().maxMemory());
     }
 }
