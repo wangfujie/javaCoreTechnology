@@ -11,7 +11,7 @@ import java.util.concurrent.CyclicBarrier;
  *
  * 实现原理：加计数方式，
  * 使用await方法让线程等待，等待线程数+1，直到等待线程数达到指定值时，释放所有等待线程
- * 可以重复利用
+ * 可以重复利用，reset方法可以重置屏障
  *
  *
  * @author wangfj
@@ -21,7 +21,7 @@ public class CyclicBarrierDemo {
     public static void main(String[] args) {
         int totalThread = 5;
         CyclicBarrier cyclicBarrier = new CyclicBarrier(totalThread);
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < totalThread; i++) {
             int threadNum = i + 1;
             String threadName = "thread" + threadNum;
 
@@ -35,9 +35,6 @@ public class CyclicBarrierDemo {
                     e.printStackTrace();
                 }
                 System.out.println(String.format("%s\t%s\t%s", new Date(), threadName, "ended"));
-                if (threadNum%totalThread == 0){
-                    cyclicBarrier.reset();
-                }
             }).start();
         }
     }
