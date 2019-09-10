@@ -1,4 +1,4 @@
-package thread;
+package juc;
 
 import java.util.Date;
 import java.util.concurrent.BrokenBarrierException;
