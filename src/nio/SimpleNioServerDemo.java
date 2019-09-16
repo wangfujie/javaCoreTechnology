@@ -3,8 +3,6 @@ package nio;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
@@ -38,6 +36,10 @@ public class SimpleNioServerDemo {
                 if (r > 0){
                     //切换模式，写->读
                     buffer.flip();
+                    //读取数据到字节数组中
+                    byte[] msgByteArray = new byte[buffer.limit()];
+                    buffer.get(msgByteArray);
+                    System.out.println(new String(msgByteArray));
                     System.out.println(Charset.forName("utf-8").decode(buffer));
                     buffer.clear();
                 }
@@ -47,8 +49,6 @@ public class SimpleNioServerDemo {
             if (socket != null){
                 System.out.println("有人连接上来了-------------");
                 list.add(socket);
-                //将socket注册给操作系统，打开并注册选择器到信道
-//                socket.register(Selector.open(), SelectionKey.OP_READ);
             }else {
                 try {
                     Thread.sleep(1000);
