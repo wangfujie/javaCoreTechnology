@@ -11,8 +11,8 @@ import java.net.Socket;
 public class ChatRoomClient {
 
     public static void main(String[] args) throws IOException {
-        Socket socket = new Socket("localhost", 8088);
-        new Thread(new TcpSendMsgThread(socket,"张三")).start();
+        Socket socket = new Socket("127.0.0.1", 10201);
+//        new Thread(new TcpSendMsgThread(socket,"张三")).start();
         new Thread(new TcpReceiveMsgThread(socket)).start();
     }
 }
