@@ -16,9 +16,9 @@ public class TestHbase {
 
     static Configuration configuration= new Configuration();
     static {
-        String hbaseConf = "D:\\Tongtech\\hbaseconf\\hbase-site.xml";
-        String coreConf = "D:\\Tongtech\\hbaseconf\\core-site.xml";
-        String hdfsConf = "D:\\Tongtech\\hbaseconf\\hdfs-site.xml";
+        String hbaseConf = "D:\\Tongtech\\测试5310的bar包\\hbaseTest.bar\\hbaseTest.jar\\resource\\xsd\\75f287e665b745d38172287690289f68\\hbase-site.xml";
+        String coreConf = "D:\\Tongtech\\测试5310的bar包\\hbaseTest.bar\\hbaseTest.jar\\resource\\xsd\\75f287e665b745d38172287690289f68\\core-site.xml";
+        String hdfsConf = "D:\\Tongtech\\测试5310的bar包\\hbaseTest.bar\\hbaseTest.jar\\resource\\xsd\\75f287e665b745d38172287690289f68\\hdfs-site.xml";
         configuration.addResource(new Path(hbaseConf));
         configuration.addResource(new Path(coreConf));
         configuration.addResource(new Path(hdfsConf));
