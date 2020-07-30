@@ -28,11 +28,11 @@
             <version>2.1.4</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-client</artifactId>
-            <version>5.15.9</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.activemq</groupId>-->
+<!--            <artifactId>activemq-client</artifactId>-->
+<!--            <version>5.15.9</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.apache.qpid</groupId>
@@ -40,10 +40,5 @@
             <version>0.39.0</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.apache.geronimo.specs</groupId>-->
-<!--            <artifactId>geronimo-jms_2.0_spec</artifactId>-->
-<!--            <version>1.0.0.alpha-2-redhat-2</version>-->
-<!--        </dependency>-->
     </dependencies>
 </project>

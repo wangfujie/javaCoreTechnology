@@ -1,8 +1,5 @@
 package com.example.jms;
 
-import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.activemq.jndi.ActiveMQInitialContextFactory;
-
 import javax.jms.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;

@@ -31,9 +31,9 @@ public class TestQpidJmsClient {
         //5、创建消息的生产者对象
         MessageProducer producer = session.createProducer(queue);
         //6、创建消息内容
-        TextMessage textMessage = session.createTextMessage("test message");
+        TextMessage textMessage = session.createTextMessage("test message qmpq");
         //7、发送消息,指定发布到哪个队列
-        producer.send(queue,textMessage);
+        producer.send(textMessage);
         //8、关闭资源
         producer.close();
         session.close();
