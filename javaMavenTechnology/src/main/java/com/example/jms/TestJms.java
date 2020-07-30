@@ -1,5 +1,8 @@
 package com.example.jms;
 
+import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.jndi.ActiveMQInitialContextFactory;
+
 import javax.jms.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -14,18 +17,22 @@ public class TestJms {
 
     private static final String CONTEXT_FACTORY_CLASS_NAME = "org.apache.activemq.jndi.ActiveMQInitialContextFactory";
 
-    private static final String TEST_QUEUE = "dynamicQueues/TestQueue";
+    private static final String CONTEXT_FACTORY_JNID_NAME = "ConnectionFactory";
 
+    private static final String USERNAME = "";
+    private static final String PASSWORD = "";
+
+    private static final String TEST_QUEUE = "testQueue";
 
     public static void main(String[] args) throws Exception {
         //1、通过Content获取连接
-        Connection connection = createConnection();
+        Connection connection = createConnection(USERNAME, PASSWORD);
         //2、开启连接
         connection.start();
-        //3、获取消息队列的目的地
-        Destination destination = getDestination(TEST_QUEUE);
-        //4、获取会话
+        //3、获取会话
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+        //4、获取消息队列的目的地
+        Destination destination = session.createQueue(TEST_QUEUE);
         //5、创建消息的生产者对象
         MessageProducer producer = session.createProducer(destination);
         //6、创建消息内容
@@ -50,18 +57,8 @@ public class TestJms {
      * @return
      * @throws Exception
      */
-    private static Connection createConnection() throws Exception{
-        ConnectionFactory factory = (ConnectionFactory)getContext().lookup("ConnectionFactory");
-        return factory.createConnection();
-    }
-
-    /**
-     * 使用JNDI获得一个Destination
-     * @param destName
-     * @return
-     * @throws Exception
-     */
-    private static Destination getDestination(String destName) throws Exception{
-        return (Destination) getContext().lookup(destName);
+    private static Connection createConnection(String username, String password) throws Exception{
+        ConnectionFactory factory = (ConnectionFactory)getContext().lookup(CONTEXT_FACTORY_JNID_NAME);
+        return "".equals(username) ? factory.createConnection() : factory.createConnection(username, password);
     }
 }
