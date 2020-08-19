@@ -36,8 +36,9 @@ public class TestHbase {
 
     public static void main(String[] args) throws Exception {
         Configuration hbaseConfig = HBaseConfiguration.create(configuration);
-//        configuration.set("hbase.zookeeper.quorum", "168.1.18.11");
-//        configuration.set("hbase.zookeeper.property.clientPort", "2181");
+        hbaseConfig.set("hbase.zookeeper.quorum", "10.10.22.81");
+//        hbaseConfig.set("hbase.zookeeper.quorum", "168.1.18.11");
+        hbaseConfig.set("hbase.zookeeper.property.clientPort", "2181");
         Connection conn = ConnectionFactory.createConnection(hbaseConfig);
 
         System.out.println(conn);
