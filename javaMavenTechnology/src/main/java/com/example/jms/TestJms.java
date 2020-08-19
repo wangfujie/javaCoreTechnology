@@ -11,6 +11,26 @@ import java.util.Properties;
  * @date 2020/7/29
  */
 public class TestJms {
+    private static final String PROVIDER_URL = "tcp://127.0.0.1:61616";
+
+    private static final String CONTEXT_FACTORY_CLASS_NAME = "org.apache.activemq.jndi.ActiveMQInitialContextFactory";
+
+    private static final String CONTEXT_FACTORY_JNID_NAME = "ConnectionFactory";
+
+    private static final String USERNAME = "";
+    private static final String PASSWORD = "";
+
+    private static final String TEST_QUEUE = "testQueue";
+
+    public static void main(String[] args) throws Exception {
+        //1、通过Content获取连接
+        Connection connection = createConnection(USERNAME, PASSWORD);
+        //2、开启连接
+        connection.start();
+        //3、获取会话
+        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+        //4、获取消息队列的目的地
+        Destination destination = session.createQueue(TEST_QUEUE);
     private static final String PROVIDER_URL = "tcp://localhost:61616";
 
     private static final String CONTEXT_FACTORY_CLASS_NAME = "org.apache.activemq.jndi.ActiveMQInitialContextFactory";
@@ -62,7 +82,7 @@ public class TestJms {
      * @return
      * @throws Exception
      */
-    private static Destination getDestination(String destName) throws Exception{
-        return (Destination) getContext().lookup(destName);
+    private static Destination getDestination(String destName) throws Exception {
+            return (Destination) getContext().lookup(destName);
     }
 }
