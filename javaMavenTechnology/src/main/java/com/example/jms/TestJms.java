@@ -10,14 +10,14 @@ import java.util.Properties;
  * @date 2020/7/29
  */
 public class TestJms {
-    private static final String PROVIDER_URL = "tcp://127.0.0.1:61616";
+    private static final String PROVIDER_URL = "tcp://10.10.22.81:61616";
 
     private static final String CONTEXT_FACTORY_CLASS_NAME = "org.apache.activemq.jndi.ActiveMQInitialContextFactory";
 
     private static final String CONTEXT_FACTORY_JNID_NAME = "ConnectionFactory";
 
-    private static final String USERNAME = "";
-    private static final String PASSWORD = "";
+    private static final String USERNAME = "admin";
+    private static final String PASSWORD = "admin";
 
     private static final String TEST_QUEUE = "testQueue";
 
@@ -64,7 +64,14 @@ public class TestJms {
      * @throws Exception
      */
     public static Connection createConnection() throws Exception{
-        return getConnectionFactory().createConnection();
+        Connection connection;
+        ConnectionFactory cf = getConnectionFactory();
+        if (USERNAME != null && !"".equals(USERNAME)) {
+            connection =  cf.createConnection(USERNAME, PASSWORD);
+        } else {
+            connection = cf.createConnection();
+        }
+        return connection;
     }
 
     /**
