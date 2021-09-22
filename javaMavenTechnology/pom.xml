@@ -40,6 +40,12 @@
             <version>0.39.0</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/io.atlasmap/camel-atlasmap -->
+        <dependency>
+            <groupId>io.atlasmap</groupId>
+            <artifactId>camel-atlasmap</artifactId>
+            <version>2.1.0</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.activemq</groupId>

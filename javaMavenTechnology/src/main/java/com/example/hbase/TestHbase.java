@@ -16,9 +16,9 @@ public class TestHbase {
 
     static Configuration configuration= new Configuration();
     static {
-        String hbaseConf = "D:\\Tongtech\\测试5310的bar包\\hbaseTest.bar\\hbaseTest.jar\\resource\\xsd\\75f287e665b745d38172287690289f68\\hbase-site.xml";
-        String coreConf = "D:\\Tongtech\\测试5310的bar包\\hbaseTest.bar\\hbaseTest.jar\\resource\\xsd\\75f287e665b745d38172287690289f68\\core-site.xml";
-        String hdfsConf = "D:\\Tongtech\\测试5310的bar包\\hbaseTest.bar\\hbaseTest.jar\\resource\\xsd\\75f287e665b745d38172287690289f68\\hdfs-site.xml";
+        String hbaseConf = "D:\\Tongtech\\TongESB53_xinchuang\\hbase-site.xml";
+        String coreConf = "D:\\Tongtech\\TongESB53_xinchuang\\core-site.xml";
+        String hdfsConf = "D:\\Tongtech\\TongESB53_xinchuang\\hdfs-site.xml";
         configuration.addResource(new Path(hbaseConf));
         configuration.addResource(new Path(coreConf));
         configuration.addResource(new Path(hdfsConf));
@@ -36,14 +36,14 @@ public class TestHbase {
 
     public static void main(String[] args) throws Exception {
         Configuration hbaseConfig = HBaseConfiguration.create(configuration);
-        hbaseConfig.set("hbase.zookeeper.quorum", "10.10.22.81");
+//        hbaseConfig.set("hbase.zookeeper.quorum", "168.1.100.127");
 //        hbaseConfig.set("hbase.zookeeper.quorum", "168.1.18.11");
-        hbaseConfig.set("hbase.zookeeper.property.clientPort", "2181");
+//        hbaseConfig.set("hbase.zookeeper.property.clientPort", "2181");
         Connection conn = ConnectionFactory.createConnection(hbaseConfig);
 
         System.out.println(conn);
-        Table table = conn.getTable(TableName.valueOf("user"));
-        get(table, new Get("row1".getBytes()));
+        Table table = conn.getTable(TableName.valueOf("esb_user"));
+        getScanner(table, new Scan());
     }
 
     private static void get(Table table, Get get) throws IOException {
